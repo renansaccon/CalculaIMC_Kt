@@ -94,6 +94,4 @@
         app:layout_constraintStart_toEndOf="@id/space"/>
 
 
-    />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
