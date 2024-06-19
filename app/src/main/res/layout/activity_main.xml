@@ -20,13 +20,14 @@
 
     <EditText
         android:id="@+id/etPeso"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="em KG"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvAltura"
+        app:layout_constraintStart_toEndOf="@id/tvPeso"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
@@ -40,14 +41,15 @@
 
     <EditText
         android:id="@+id/etAltura"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="em Metros"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:padding="16dp"
-        app:layout_constraintStart_toStartOf="@id/etPeso"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvAltura"/>
+        app:layout_constraintStart_toEndOf="@id/tvPeso"
+        app:layout_constraintTop_toTopOf="@id/tvAltura" />
 
     <TextView
         android:id="@+id/tvIMC"
@@ -74,15 +76,14 @@
         android:padding="16dp"
         android:text="Calcular"
         app:layout_constraintTop_toBottomOf="@id/tvResultado"
-        app:layout_constraintStart_toEndOf="@id/tvIMC"/>
+        app:layout_constraintStart_toEndOf="@id/tvIMC" />
 
     <Space
         android:id="@+id/space"
         android:layout_height="wrap_content"
         android:layout_width="20dp"
         app:layout_constraintTop_toTopOf="@id/btCalcular"
-        app:layout_constraintStart_toEndOf="@id/btCalcular"
-        />
+        app:layout_constraintStart_toEndOf="@id/btCalcular" />
 
     <Button
         android:id="@+id/btLimpar"
