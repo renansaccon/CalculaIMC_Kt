@@ -1,20 +1,19 @@
 package saccon.renan.br.calculaimc_kt
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import java.util.Locale
 import kotlin.math.pow
+import java.text.NumberFormat
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var tvPeso : TextView
     private lateinit var etPeso : EditText
-    private lateinit var tvAltura : TextView
     private lateinit var etAltura : EditText
     private lateinit var btCalcular : Button
     private lateinit var btLimpar : Button
@@ -26,9 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tvPeso = findViewById(R.id.tvPeso)
         etPeso = findViewById(R.id.etPeso)
-        tvAltura = findViewById(R.id.tvAltura)
         etAltura = findViewById(R.id.etAltura)
         btCalcular = findViewById(R.id.btCalcular)
         btLimpar = findViewById(R.id.btLimpar)
@@ -48,31 +45,40 @@ class MainActivity : AppCompatActivity() {
 
     private fun btCalcularOnClick() {
         if (etPeso.text.isEmpty()){
-            etPeso.setError("Favor preencher o peso")
+            etPeso.error = getString(R.string.erro_peso)
             etPeso.requestFocus()
             return
         }
 
         if (etAltura.text.isEmpty()){
-            etAltura.setError("Favor preencher a altura")
+            etAltura.error = getString(R.string.erro_altura)
             etAltura.requestFocus()
             return
         }
 
+
         val vlPeso = etPeso.text.toString().toDouble()
         val vlAltura = etAltura.text.toString().toDouble()
-        val vlResultado = vlPeso / vlAltura.pow(2)
 
-        tvResultado.text = "%.2f".format(vlResultado)
 
+        if  ( Locale.getDefault().language.equals( "en" )){
+            val vlIMC = 703 * (vlPeso / vlAltura.pow(2))
+            val nf = NumberFormat.getNumberInstance(Locale.US)
+            tvResultado.text = nf.format( vlIMC )
+        }
+        else {
+            val vlIMC = vlPeso / vlAltura.pow(2)
+            val nf = NumberFormat.getNumberInstance(Locale.getDefault())
+            tvResultado.text = nf.format( vlIMC )
+        }
     }
 
     private fun btLimparOnClick() {
-        etPeso.setText( "" )
-        etAltura.setText( "" )
-        tvResultado.setText( "0.0" )
+        etPeso.setText(getString(R.string.branco))
+        etAltura.setText(getString(R.string.branco))
+        tvResultado.text = getString(R.string.zeros)
         etPeso.requestFocus()
-        Toast.makeText(this, "Campos apagados", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.campos_apagados), Toast.LENGTH_LONG).show()
 
     }
 
